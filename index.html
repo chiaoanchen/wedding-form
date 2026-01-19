@@ -121,11 +121,7 @@ input::placeholder {
       opacity: 0.9;
     }
 
-    /* 必填欄位提示 */
-    input:required, select:required {
-      border-color: #333;
-    }
-    
+
    /* 高雅風格 Radio Buttons - 修正版 */
 form div label {
   display: inline-flex;
@@ -214,29 +210,31 @@ textarea::placeholder {
   <!-- 🔽 婚禮資訊區塊 -->
   <div class="wedding-info">
     <h2>Juliet & Romeo's Wedding</h2>
+    <div style="margin-top: 20px;">
     <p >2026 年 06 月 20 日 (週日)</p>
     <p>晶華酒店宴會廳</p>
     <p style="font-size:14px;"> 台北市中山區南京東路二段123號</p>
+      </div>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.407379972681!2d121.51806179678951!3d25.054177999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a968fd15c21d%3A0x1b494fb2ade1569a!2z5pm26I-v6YWS5bqX!5e0!3m2!1szh-TW!2sus!4v1768818721640!5m2!1szh-TW!2sus" allowfullscreen loading="lazy"></iframe>
-    <p>感謝您的到來與祝福，我們期待與您一同分享這特別的時刻！</p>
+    <p style="margin: 10px 0px">感謝您的到來與祝福，我們期待與您一同分享這特別的時刻！</p>
   </div>
 
   <!-- 🔽 表單 -->
   <form id="rsvpForm">
 
-    <label>姓名 / Name
+    <label>姓名 / Name *
       <input name="name" required>
     </label>
 
-<label>聯絡電話 / Phone
+<label>聯絡電話 / Phone *
   <input name="phone" required placeholder="0987654321">
 </label>
     <label id="emailField">
       電子郵件 / Email
-      <input type="email" name="email" required  placeholder="example@gmail.com">
+      <input type="email" name="email" selected placeholder="example@gmail.com">
     </label>
 
-    <label>出席人數（含自己） / Attendees (Incude myself)
+    <label>出席人數（含自己） / Attendees (Incude myself) *
       <div class="number-input">
         <button type="button" class="decrease">-</button>
         <input type="number" name="attendees" value="1" min="1" required>
@@ -252,7 +250,7 @@ textarea::placeholder {
       </div>
     </label>
 
-<label>餐飲需求 / Meal</label>
+<label>餐食需求 / Meal *</label>
 <p class="note">如出席人數為多位，且每位餐飲需求不同，請勾選其他並填入於備註</p>
 <div>
   <label><input type="radio" name="meal" value="葷食" required>葷食</label>
@@ -260,7 +258,7 @@ textarea::placeholder {
     <label><input type="radio" name="meal" value="其他" required>其他</label>       
 </div>
 
-<label>是否需要紙本喜帖 / Do you need Paper Invitation?</label>
+<label>是否需要紙本喜帖 / Do you need Paper Invitation? *</label>
 <div>
   <label><input type="radio" name="paperInvite" value="是" required> 是</label>
   <label><input type="radio" name="paperInvite" value="否" required> 否</label>
@@ -271,9 +269,9 @@ textarea::placeholder {
       <input name="address">
     </label>
 <label>備註 / Memo
-  <textarea name="memo" rows="4" placeholder="例如：特別需求、祝福留言…"></textarea>
+  <textarea name="memo" rows="4" placeholder="例如：特殊餐食需求、祝福留言…"></textarea>
 </label>
-    <button type="submit">送出 Send</button>
+    <button type="submit" id="submitBtn">送出 Send</button>
   </form>
 <p class="footer-note">CIRCO ART 此刻藝術 ©</p>
 </div>
@@ -304,30 +302,51 @@ document.querySelectorAll('.number-input').forEach(wrapper => {
 });
 
 // 表單送出
+
 document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  
+   const f = e.target;
+  const submitBtn = document.getElementById('submitBtn');
 
-  const f = e.target;
+  // 🔒 送出後立刻鎖住按鈕
+  submitBtn.disabled = true;
+  const originalText = submitBtn.innerText;
+  submitBtn.innerText = '送出中...';
+
   const data = {
     name: f.name.value,
     phone: f.phone.value,
+    email: f.email?.value || '',
     attendees: f.attendees.value,
     babySeat: f.babySeat.value,
     meal: f.meal.value,
     paperInvite: f.paperInvite.value,
     address: f.address?.value || '',
-    email: f.email?.value || '',
     memo: f.memo?.value || ''
   };
+  
+  
+  try {
+    await fetch('https://script.google.com/macros/s/AKfycbwpgY9bRGtPd0-pjczNG5EkpPTyHSA2wYdRU3_buiXP8IHoOwMKSL4DaZCNUnisRM2y9g/exec',
+      {
+        method: 'POST',
+        body: JSON.stringify(data)
+      }
+    );
 
-  await fetch('https://script.google.com/macros/s/AKfycbzJkncF54YVBJGNzVfCmww9mH5C_secXlEu7G7tfGlwYbZOtBuN-yogpZdmBawby7cRqg/exec'
-, {
-    method: 'POST',
-    body: JSON.stringify(data)
-  });
+    alert('回覆成功，謝謝您！');
+    f.reset();
 
-  alert('回覆成功，謝謝您！');
-  f.reset();
+  } catch (err) {
+    alert('送出失敗，請稍後再試一次');
+    console.error(err);
+
+  } finally {
+    // 🔓 不管成功或失敗，都恢復按鈕
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalText;
+  }
 });
 
 </script>
