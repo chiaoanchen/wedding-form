@@ -266,21 +266,21 @@ textarea::placeholder {
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  const invite = document.getElementById('paperInvite');
-  const address = document.getElementById('addressField');
-  const email = document.getElementById('emailField');
+ // 紙本喜帖切換
+const paperInvite = document.getElementById('paperInvite');
+  const addressField = document.getElementById('addressField');
+  const emailField = document.getElementById('emailField');
 
-  invite.addEventListener('change', () => {
-    if(invite.value === '是') {
-      address.style.display = 'block';
-      email.style.display = 'none';
+  paperInvite.addEventListener('change', () => {
+    if (paperInvite.value === '是') {
+      addressField.style.display = 'block';
+      emailField.style.display = 'none';
     } else {
-      address.style.display = 'none';
-      email.style.display = 'block';
+      addressField.style.display = 'none';
+      emailField.style.display = 'block';
     }
   });
-
+   
   // 數字增減
   document.querySelectorAll('.number-input').forEach(wrapper => {
     const input = wrapper.querySelector('input');
@@ -291,8 +291,8 @@ textarea::placeholder {
       input.stepDown();
     });
   });
-});
-
+</script>
+   
   document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
