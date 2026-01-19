@@ -265,9 +265,8 @@ textarea::placeholder {
 <p class="footer-note">CIRCO ART 此刻藝術 ©</p>
 </div>
 
-<script>
- // 紙本喜帖切換
-const paperInvite = document.getElementById('paperInvite');
+   <script>
+  const paperInvite = document.getElementById('paperInvite');
   const addressField = document.getElementById('addressField');
   const emailField = document.getElementById('emailField');
 
@@ -280,19 +279,22 @@ const paperInvite = document.getElementById('paperInvite');
       emailField.style.display = 'block';
     }
   });
-   
-  // 數字增減
+
   document.querySelectorAll('.number-input').forEach(wrapper => {
     const input = wrapper.querySelector('input');
-    wrapper.querySelector('.increase').addEventListener('click', () => {
-      input.stepUp();
+    const btnIncrease = wrapper.querySelector('.increase');
+    const btnDecrease = wrapper.querySelector('.decrease');
+
+    btnIncrease.addEventListener('click', () => {
+      input.stepUp(); // HTML5 input[type=number] 的方法
     });
-    wrapper.querySelector('.decrease').addEventListener('click', () => {
+
+    btnDecrease.addEventListener('click', () => {
       input.stepDown();
     });
   });
-   
-   document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
+      
+  document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const f = e.target;
@@ -305,7 +307,7 @@ const paperInvite = document.getElementById('paperInvite');
       paperInvite: f.paperInvite.value,
       address: f.address?.value || '',
       email: f.email?.value || '',
-      memo: f.memo?.value || '',
+       memo:f.memo?.value || ''
     };
 
     await fetch('https://script.google.com/macros/s/AKfycbzJkncF54YVBJGNzVfCmww9mH5C_secXlEu7G7tfGlwYbZOtBuN-yogpZdmBawby7cRqg/exec', {
