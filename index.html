@@ -1,1 +1,142 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>婚禮出席回覆</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #fafafa;
+  }
+  .container {
+    max-width: 520px;
+    margin: auto;
+    padding: 24px;
+    background: #fff;
+  }
+  .visual {
+    width: 100%;
+    height: 220px;
+    background: #eee;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+  }
+  label {
+    display: block;
+    margin-top: 16px;
+  }
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+  }
+  button {
+    margin-top: 24px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+</style>
+</head>
 
+<body>
+<div class="container">
+
+  <!-- 🔽 視覺設計圖放這裡 -->
+  <div class="visual">
+    視覺設計圖放置區
+  </div>
+
+  <form id="rsvpForm">
+
+    <label>姓名
+      <input name="name" required>
+    </label>
+
+    <label>聯絡電話
+      <input name="phone" required>
+    </label>
+
+    <label>出席人數（含自己）
+      <input type="number" name="attendees" min="1" required>
+    </label>
+
+    <label>嬰兒座椅數
+      <input type="number" name="babySeat" min="0" value="0">
+    </label>
+
+    <label>餐飲需求
+      <select name="meal">
+        <option value="葷食">葷食</option>
+        <option value="素食">素食</option>
+      </select>
+    </label>
+
+    <label>是否需要紙本喜帖
+      <select name="paperInvite" id="paperInvite">
+        <option value="是">是</option>
+        <option value="否">否</option>
+      </select>
+    </label>
+
+    <!-- 地址 -->
+    <label id="addressField">
+      收件地址
+      <input name="address">
+    </label>
+
+    <!-- Email -->
+    <label id="emailField" style="display:none;">
+      Email
+      <input type="email" name="email">
+    </label>
+
+    <button type="submit">送出回覆</button>
+  </form>
+
+</div>
+
+<script>
+  const paperInvite = document.getElementById('paperInvite');
+  const addressField = document.getElementById('addressField');
+  const emailField = document.getElementById('emailField');
+
+  paperInvite.addEventListener('change', () => {
+    if (paperInvite.value === '是') {
+      addressField.style.display = 'block';
+      emailField.style.display = 'none';
+    } else {
+      addressField.style.display = 'none';
+      emailField.style.display = 'block';
+    }
+  });
+
+  document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const f = e.target;
+    const data = {
+      name: f.name.value,
+      phone: f.phone.value,
+      attendees: f.attendees.value,
+      babySeat: f.babySeat.value,
+      meal: f.meal.value,
+      paperInvite: f.paperInvite.value,
+      address: f.address?.value || '',
+      email: f.email?.value || ''
+    };
+
+    await fetch('https://script.google.com/macros/s/AKfycbzJkncF54YVBJGNzVfCmww9mH5C_secXlEu7G7tfGlwYbZOtBuN-yogpZdmBawby7cRqg/exec', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+
+    alert('回覆成功，謝謝您！');
+    f.reset();
+  });
+</script>
+
+</body>
+</html>
