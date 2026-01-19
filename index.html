@@ -95,9 +95,15 @@ input::placeholder {
     .number-input input {
       border: none;
       text-align: center;
-      width: 50px;
+      width: 60px;
       font-size: 16px;
     }
+    
+    input[type=number]::-webkit-outer-spin-button,
+   input[type=number]::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
 
     button[type="submit"] {
       margin-top: 30px;
@@ -188,6 +194,12 @@ textarea::placeholder {
   margin-top: 40px;
 }
 
+.note{
+  font-size: 12px;
+  color: #999;
+  margin:0;
+}
+
 
   </style>
 </head>
@@ -219,6 +231,10 @@ textarea::placeholder {
 <label>聯絡電話 / Phone
   <input name="phone" required placeholder="0987654321">
 </label>
+    <label id="emailField">
+      電子郵件 / Email
+      <input type="email" name="email" required  placeholder="example@gmail.com">
+    </label>
 
     <label>出席人數（含自己） / Attendees (Incude myself)
       <div class="number-input">
@@ -237,9 +253,11 @@ textarea::placeholder {
     </label>
 
 <label>餐飲需求 / Meal</label>
+<p class="note">如出席人數為多位，且每位餐飲需求不同，請勾選其他並填入於備註</p>
 <div>
   <label><input type="radio" name="meal" value="葷食" required>葷食</label>
   <label><input type="radio" name="meal" value="素食" required>素食</label>
+    <label><input type="radio" name="meal" value="其他" required>其他</label>       
 </div>
 
 <label>是否需要紙本喜帖 / Do you need Paper Invitation?</label>
@@ -248,14 +266,9 @@ textarea::placeholder {
   <label><input type="radio" name="paperInvite" value="否" required> 否</label>
 </div>
 
-    <label id="addressField">
+    <label id="addressField" style="display:none;">
       喜帖收件地址 / Address
       <input name="address">
-    </label>
-
-    <label id="emailField" style="display:none;">
-      電子郵件 / Email
-      <input type="email" name="email" placeholder="example@gmail.com">
     </label>
 <label>備註 / Memo
   <textarea name="memo" rows="4" placeholder="例如：特別需求、祝福留言…"></textarea>
@@ -268,17 +281,14 @@ textarea::placeholder {
 <script>
 // 紙本喜帖切換
 const addressField = document.getElementById('addressField');
-const emailField = document.getElementById('emailField');
 
 const paperRadios = document.querySelectorAll('input[name="paperInvite"]');
 paperRadios.forEach(radio => {
   radio.addEventListener('change', () => {
     if (radio.value === '是' && radio.checked) {
       addressField.style.display = 'block';
-      emailField.style.display = 'none';
-    } else if (radio.value === '否' && radio.checked) {
-      addressField.style.display = 'none';
-      emailField.style.display = 'block';
+    } else {
+     addressField.style.display = 'none';
     }
   });
 });
@@ -324,4 +334,3 @@ document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
 
 </body>
 </html>
-
