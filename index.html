@@ -2,116 +2,296 @@
 <head>
 <meta charset="UTF-8">
 <title>婚禮出席回覆</title>
-<style>
-  body {
-    font-family: sans-serif;
-    background: #fafafa;
-  }
-  .container {
-    max-width: 520px;
-    margin: auto;
-    padding: 24px;
-    background: #fff;
-  }
-  .visual {
-    width: 100%;
-    height: 220px;
-    background: #eee;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-  }
-  label {
-    display: block;
-    margin-top: 16px;
-  }
-  input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-  }
-  button {
-    margin-top: 24px;
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-  }
-</style>
-</head>
+   <link rel="icon" type="image/png" href="https://circoart.com/wp-content/uploads/2024/02/cropped-circo-logo-10.png">
+ <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #ffffff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 520px;
+      margin: auto;
+      padding: 32px;
+      background: #fff;
+    }
+    .visual {
+      width: 100%;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 20px;
+    }
 
+    /* 婚禮資訊區塊 */
+    .wedding-info {
+      text-align: center;
+      margin: 32px 0;
+      font-size: 16px;
+      color: #4B4B4B;
+    }
+    .wedding-info h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 12px;
+    }
+    .wedding-info p {
+      margin: 6px 0;
+    }
+    .wedding-info iframe {
+      width: 100%;
+      height: 200px;
+      border: 0;
+      margin-top: 12px;
+      border-radius: 12px;
+    }
+
+    form label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 500;
+      font-size: 15px;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: 1px solid #C4B5A7;
+      border-radius: 6px;
+      font-size: 15px;
+      color: #333;
+      box-sizing: border-box;
+    }
+
+input::placeholder {
+  color: #999;
+  opacity: 1; /* 確保所有瀏覽器都顯示相同顏色 */
+}
+
+    /* 數字增減按鈕 */
+    .number-input {
+      display: flex;
+      align-items: center;
+      padding: 2px 10px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .number-input button {
+      background: #C4B5A7;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 16px;
+  border-radius: 20%;
+      color: #fff;
+    }
+    .number-input input {
+      border: none;
+      text-align: center;
+      width: 50px;
+      font-size: 16px;
+    }
+
+    button[type="submit"] {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: #C4B5A7;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button[type="submit"]:hover {
+      opacity: 0.9;
+    }
+
+    /* 必填欄位提示 */
+    input:required, select:required {
+      border-color: #333;
+    }
+    
+   /* 高雅風格 Radio Buttons - 修正版 */
+form div label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 20px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+form div label input[type="radio"] {
+  appearance: none; /* 移除預設樣式 */
+  width: 10px;      /* 外圈縮小 */
+  height: 10px;
+  border: 2px solid #C4B5A7;
+  border-radius: 50%;
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+form div label input[type="radio"]::after {
+  content: '';
+  display: block;
+  width: 17px;
+  height:15px;
+  background-color: #C4B5A7;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: 0.2s;
+}
+
+form div label input[type="radio"]:checked::after {
+  opacity: 1;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #C4B5A7;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333;
+  font-family: 'Playfair Display', serif;
+  resize: vertical; /* 允許使用者上下調整高度 */
+  box-sizing: border-box;
+}
+
+textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+.footer-note {
+  text-align: center;
+  font-size: 10px;
+  color: #999;
+  margin-top: 40px;
+}
+
+
+  </style>
+</head>
 <body>
 <div class="container">
 
-  <!-- 🔽 視覺設計圖放這裡 -->
-  <div class="visual">
-    視覺設計圖放置區
+  <!-- 🔽 視覺設計圖 -->
+<div class="visual">
+  <img src="https://i0.wp.com/circoart.com/wp-content/uploads/2024/05/%E6%89%8B%E7%B9%AA%E6%B8%B2%E6%9F%93%E6%B0%B4%E5%BD%A9-%EF%BC%A2-%E6%9C%89%E8%83%8C%E6%99%AF.png" alt="婚禮視覺圖" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+</div>
+
+  <!-- 🔽 婚禮資訊區塊 -->
+  <div class="wedding-info">
+    <h2>Juliet & Romeo's Wedding</h2>
+    <p >2026 年 06 月 20 日 (週日)</p>
+    <p>晶華酒店宴會廳</p>
+    <p style="font-size:14px;"> 台北市中山區南京東路二段123號</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.407379972681!2d121.51806179678951!3d25.054177999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a968fd15c21d%3A0x1b494fb2ade1569a!2z5pm26I-v6YWS5bqX!5e0!3m2!1szh-TW!2sus!4v1768818721640!5m2!1szh-TW!2sus" allowfullscreen loading="lazy"></iframe>
+    <p>感謝您的到來與祝福，我們期待與您一同分享這特別的時刻！</p>
   </div>
 
+  <!-- 🔽 表單 -->
   <form id="rsvpForm">
 
-    <label>姓名
+    <label>姓名 / Name
       <input name="name" required>
     </label>
 
-    <label>聯絡電話
-      <input name="phone" required>
+<label>聯絡電話 / Phone
+  <input name="phone" required placeholder="0987654321">
+</label>
+
+    <label>出席人數（含自己） / Attendees (Incude myself)
+      <div class="number-input">
+        <button type="button" class="decrease">-</button>
+        <input name="attendees" value="1" min="1" required>
+        <button type="button" class="increase">+</button>
+      </div>
     </label>
 
-    <label>出席人數（含自己）
-      <input type="number" name="attendees" min="1" required>
+    <label>嬰兒座椅數 / Baby Seat
+      <div class="number-input">
+        <button type="button" class="decrease">-</button>
+        <input name="babySeat" value="0" min="0">
+        <button type="button" class="increase">+</button>
+      </div>
     </label>
 
-    <label>嬰兒座椅數
-      <input type="number" name="babySeat" min="0" value="0">
-    </label>
+<label>餐飲需求 / Meal</label>
+<div>
+  <label><input type="radio" name="meal" value="葷食" required>葷食</label>
+  <label><input type="radio" name="meal" value="素食" required>素食</label>
+</div>
 
-    <label>餐飲需求
-      <select name="meal">
-        <option value="葷食">葷食</option>
-        <option value="素食">素食</option>
-      </select>
-    </label>
+<label>是否需要紙本喜帖 / Do you need Paper Invitation?</label>
+<div>
+  <label><input type="radio" name="paperInvite" value="是" required> 是</label>
+  <label><input type="radio" name="paperInvite" value="否" required> 否</label>
+</div>
 
-    <label>是否需要紙本喜帖
-      <select name="paperInvite" id="paperInvite">
-        <option value="是">是</option>
-        <option value="否">否</option>
-      </select>
-    </label>
-
-    <!-- 地址 -->
     <label id="addressField">
-      收件地址
+      喜帖收件地址 / Address
       <input name="address">
     </label>
 
-    <!-- Email -->
     <label id="emailField" style="display:none;">
-      Email
-      <input type="email" name="email">
+      電子郵件 / Email
+      <input type="email" name="email" placeholder="example@gmail.com">
     </label>
-
-    <button type="submit">送出回覆</button>
+<label>備註 / Memo
+  <textarea name="memo" rows="4" placeholder="例如：特別需求、祝福留言…"></textarea>
+</label>
+    <button type="submit">送出 Send</button>
   </form>
-
+<p class="footer-note">CIRCO ART 此刻藝術 ©</p>
 </div>
 
 <script>
-  const paperInvite = document.getElementById('paperInvite');
-  const addressField = document.getElementById('addressField');
-  const emailField = document.getElementById('emailField');
+  document.addEventListener('DOMContentLoaded', function() {
+  const invite = document.getElementById('paperInvite');
+  const address = document.getElementById('addressField');
+  const email = document.getElementById('emailField');
 
-  paperInvite.addEventListener('change', () => {
-    if (paperInvite.value === '是') {
-      addressField.style.display = 'block';
-      emailField.style.display = 'none';
+  invite.addEventListener('change', () => {
+    if(invite.value === '是') {
+      address.style.display = 'block';
+      email.style.display = 'none';
     } else {
-      addressField.style.display = 'none';
-      emailField.style.display = 'block';
+      address.style.display = 'none';
+      email.style.display = 'block';
     }
   });
+
+  // 數字增減
+  document.querySelectorAll('.number-input').forEach(wrapper => {
+    const input = wrapper.querySelector('input');
+    wrapper.querySelector('.increase').addEventListener('click', () => {
+      input.stepUp();
+    });
+    wrapper.querySelector('.decrease').addEventListener('click', () => {
+      input.stepDown();
+    });
+  });
+});
 
   document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -125,7 +305,8 @@
       meal: f.meal.value,
       paperInvite: f.paperInvite.value,
       address: f.address?.value || '',
-      email: f.email?.value || ''
+      email: f.email?.value || '',
+      memo: f.memo?.value || '',
     };
 
     await fetch('https://script.google.com/macros/s/AKfycbzJkncF54YVBJGNzVfCmww9mH5C_secXlEu7G7tfGlwYbZOtBuN-yogpZdmBawby7cRqg/exec', {
