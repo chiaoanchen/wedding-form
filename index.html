@@ -5,6 +5,8 @@
    <link rel="icon" type="image/png" href="https://circoart.com/wp-content/uploads/2024/02/cropped-circo-logo-10.png">
  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
   <style>
+  
+  
     body {
       font-family: 'Playfair Display', serif;
       background: #ffffff;
@@ -12,12 +14,86 @@
       margin: 0;
       padding: 0;
     }
+  
+  .hero {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  overflow: hidden;
+  background: #c4b5a7;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 可依照片構圖調整 50% ~ 80% 之間 */
+  object-position: center 70%;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: #000;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* ===== 區塊二：We're getting married ===== */
+.intro {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: #f7f3ef;
+}
+
+.intro h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.intro .subtitle {
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+.intro-info p {
+  margin: 6px 0;
+  font-size: 16px;
+  color: #4B4B4B;
+}
+
+.intro-info .address {
+  font-size: 14px;
+  color: #777;
+}
+
+
+/* ===== 區塊三：表單 ===== */
+    
     .container {
-      max-width: 520px;
-      margin: auto;
-      padding: 32px;
-      background: #fff;
-    }
+  max-width: 520px;
+  margin: auto;
+  padding: 40px 32px 60px;
+  background: #fff;
+}
+    
     .visual {
       width: 100%;
       margin-bottom: 24px;
@@ -26,29 +102,6 @@
       justify-content: center;
       color: #999;
       font-size: 20px;
-    }
-
-    /* 婚禮資訊區塊 */
-    .wedding-info {
-      text-align: center;
-      margin: 32px 0;
-      font-size: 16px;
-      color: #4B4B4B;
-    }
-    .wedding-info h2 {
-      font-size: 24px;
-      color: #333;
-      margin-bottom: 12px;
-    }
-    .wedding-info p {
-      margin: 6px 0;
-    }
-    .wedding-info iframe {
-      width: 100%;
-      height: 200px;
-      border: 0;
-      margin-top: 12px;
-      border-radius: 12px;
     }
 
     form label {
@@ -134,11 +187,11 @@ form div label {
 }
 
 form div label input[type="radio"] {
-  appearance: none; /* 移除預設樣式 */
-  width: 10px;      /* 外圈縮小 */
+  appearance: none;  /*移除預設樣式 */
+  width: 20px;      /* 外圈縮小 */
   height: 10px;
   border: 2px solid #C4B5A7;
-  border-radius: 50%;
+  border-radius: 100%;
   margin-right: 8px;
   position: relative;
   cursor: pointer;
@@ -153,10 +206,8 @@ form div label input[type="radio"]::after {
   width: 17px;
   height:15px;
   background-color: #C4B5A7;
-  border-radius: 50%;
+  border-radius: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: 0.2s;
@@ -183,12 +234,6 @@ textarea::placeholder {
   color: #999;
   opacity: 1;
 }
-.footer-note {
-  text-align: center;
-  font-size: 10px;
-  color: #999;
-  margin-top: 40px;
-}
 
 .note{
   font-size: 12px;
@@ -197,31 +242,174 @@ textarea::placeholder {
 }
 
 
+/* ===== 區塊四：收尾 ===== */
+.welcoming {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: #f7f3ef;
+  color: #4B4B4B;
+}
+
+.welcoming p {
+  font-size: 18px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+}
+
+.map-info {
+  width: 100%;
+  padding: 40px 0 60px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.map-info iframe {
+  width: 90%;
+  max-width: 520px;
+  height: 260px;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+
+.footer-note {
+  text-align: center;
+  font-size: 10px;
+  color: #999;
+  margin-top: 40px;
+}
+
+/* =========================
+   Responsive - Mobile First
+   ========================= */
+
+@media (max-width: 768px) {
+
+  /* Hero 區塊 */
+  .hero {
+    height: 55vh;
+  }
+
+  .hero-text h1 {
+    font-size: 32px;
+    letter-spacing: 1px;
+  }
+  
+  .hero img {
+    object-position: center 50%; /* 手機回到正中 */
+  }
+
+  /* Intro 區塊 */
+  .intro {
+    padding: 60px 20px 50px;
+  }
+
+  .intro h2 {
+    font-size: 26px;
+  }
+
+  .intro .subtitle {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .intro-info p {
+    font-size: 14px;
+  }
+
+  .intro-info .address {
+    font-size: 13px;
+  }
+
+  /* 表單容器 */
+  .container {
+    padding: 32px 20px 50px;
+  }
+
+  form label {
+    font-size: 14px;
+  }
+
+  input, textarea, select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button[type="submit"] {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  /* 感謝區塊 */
+  .welcoming {
+    padding: 60px 20px 50px;
+  }
+
+  .welcoming p {
+    font-size: 16px;
+  }
+
+  /* 地圖 */
+  .map-info iframe {
+    height: 220px;
+    border-radius: 12px;
+  }
+
+  .footer-note {
+    margin-top: 30px;
+  }
+}
+
+/* =========================
+   Large Screen Enhancement
+   ========================= */
+
+@media (min-width: 1024px) {
+
+  .hero-text h1 {
+    font-size: 56px;
+  }
+
+  .intro h2 {
+    font-size: 42px;
+  }
+
+  .container {
+    max-width: 560px;
+  }
+
+  .map-info iframe {
+    max-width: 600px;
+    height: 300px;
+  }
+}
+
+
   </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- 🔽 視覺設計圖 -->
-<div class="visual">
-  <img src="https://i0.wp.com/circoart.com/wp-content/uploads/2024/05/%E6%89%8B%E7%B9%AA%E6%B8%B2%E6%9F%93%E6%B0%B4%E5%BD%A9-%EF%BC%A2-%E6%9C%89%E8%83%8C%E6%99%AF.png" alt="婚禮視覺圖" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+<div class="hero">
+  <img src="https://i0.wp.com/circoart.com/wp-content/uploads/2024/05/%E6%89%8B%E7%B9%AA%E6%B8%B2%E6%9F%93%E6%B0%B4%E5%BD%A9-%EF%BC%A2-%E6%9C%89%E8%83%8C%E6%99%AF.png" alt="hero">
+  <div class="hero-text">
+    <h1>Juliet & Romeo</h1>
+  </div>
 </div>
 
-  <!-- 🔽 婚禮資訊區塊 -->
-  <div class="wedding-info">
-    <h2>Juliet & Romeo's Wedding</h2>
-    <div style="margin-top: 20px;">
-    <p >2026 年 06 月 20 日 (週日)</p>
+<div class="intro">
+  <h2>We're getting married!</h2>
+  <p class="subtitle">Save the Date</p>
+
+  <div class="intro-info">
+    <p>2026 年 06 月 20 日 (週日)</p>
     <p>晶華酒店宴會廳</p>
-    <p style="font-size:14px;"> 台北市中山區南京東路二段123號</p>
-      </div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.407379972681!2d121.51806179678951!3d25.054177999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a968fd15c21d%3A0x1b494fb2ade1569a!2z5pm26I-v6YWS5bqX!5e0!3m2!1szh-TW!2sus!4v1768818721640!5m2!1szh-TW!2sus" allowfullscreen loading="lazy"></iframe>
-    <p style="margin: 10px 0px">感謝您的到來與祝福，我們期待與您一同分享這特別的時刻！</p>
+    <p class="address">台北市中山區南京東路二段123號</p>
   </div>
-
-  <!-- 🔽 表單 -->
+</div>
+<div class="container">
   <form id="rsvpForm">
-
     <label>姓名 / Name *
       <input name="name" required>
     </label>
@@ -273,8 +461,28 @@ textarea::placeholder {
 </label>
     <button type="submit" id="submitBtn">送出 Send</button>
   </form>
-<p class="footer-note">CIRCO ART 此刻藝術 ©</p>
+  
 </div>
+
+<div class="welcoming">
+  <p>
+    感謝您的回覆與祝福<br>
+    我們非常期待在婚禮當天與您相見<br><br>
+    <span style="font-size:14px; color:#888;">
+      Thank you for being part of our special day.
+    </span>
+  </p>
+</div>
+<div class="map-info">
+  <div style="width:100%; text-align:center;">
+    <p style="margin-bottom:20px; color:#999; letter-spacing:2px;">
+      WEDDING LOCATION
+    </p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.407379972681!2d121.51806179678951!3d25.054177999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a968fd15c21d%3A0x1b494fb2ade1569a!2z5pm26I-v6YWS5bqX!5e0!3m2!1szh-TW!2sus!4v1768818721640!5m2!1szh-TW!2sus" allowfullscreen loading="lazy"></iframe>
+  </div>
+</div>
+  
+  <p class="footer-note">CIRCO ART 此刻藝術 ©</p>
 
 <script>
 // 紙本喜帖切換
@@ -337,6 +545,7 @@ document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
 
     alert('回覆成功，謝謝您！');
     f.reset();
+    document.querySelector('.welcoming').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
     alert('送出失敗，請稍後再試一次');
