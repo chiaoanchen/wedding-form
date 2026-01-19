@@ -1,6 +1,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>婚禮出席回覆</title>
    <link rel="icon" type="image/png" href="https://circoart.com/wp-content/uploads/2024/02/cropped-circo-logo-10.png">
  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
@@ -62,7 +63,7 @@
 }
 
 .intro h2 {
-  font-size: 42px;
+  font-size: 6vw; 
   font-weight: 400;
   margin-bottom: 16px;
   font-family: 'Dancing Script', cursive;
@@ -106,12 +107,14 @@
 
 
 /* ===== 區塊三：表單 ===== */
-    
-    .container {
+  
+.container {
   max-width: 520px;
-  margin: auto;
-  padding: 40px 32px 60px;
+  width: 90%;      /* 手機螢幕時寬度為螢幕的 90% */
+  margin: 32px auto;
+  padding: 32px;
   background: #fff;
+  box-sizing: border-box;
 }
     
     .visual {
@@ -326,9 +329,6 @@ textarea::placeholder {
     padding: 60px 20px 50px;
   }
 
- .intro h2 {
-    font-size: 32px;
-  }
 
   .intro .subtitle {
     font-size: 14px;
