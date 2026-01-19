@@ -223,7 +223,7 @@ textarea::placeholder {
     <label>出席人數（含自己） / Attendees (Incude myself)
       <div class="number-input">
         <button type="button" class="decrease">-</button>
-        <input name="attendees" value="1" min="1" required>
+        <input type="number" name="attendees" value="1" min="1" required>
         <button type="button" class="increase">+</button>
       </div>
     </label>
@@ -231,7 +231,7 @@ textarea::placeholder {
     <label>嬰兒座椅數 / Baby Seat
       <div class="number-input">
         <button type="button" class="decrease">-</button>
-        <input name="babySeat" value="0" min="0">
+        <input type="number" name="babySeat" value="0" min="0">
         <button type="button" class="increase">+</button>
       </div>
     </label>
@@ -265,60 +265,63 @@ textarea::placeholder {
 <p class="footer-note">CIRCO ART 此刻藝術 ©</p>
 </div>
 
-   <script>
-  const paperInvite = document.getElementById('paperInvite');
-  const addressField = document.getElementById('addressField');
-  const emailField = document.getElementById('emailField');
+<script>
+// 紙本喜帖切換
+const addressField = document.getElementById('addressField');
+const emailField = document.getElementById('emailField');
 
-  paperInvite.addEventListener('change', () => {
-    if (paperInvite.value === '是') {
+const paperRadios = document.querySelectorAll('input[name="paperInvite"]');
+paperRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    if (radio.value === '是' && radio.checked) {
       addressField.style.display = 'block';
       emailField.style.display = 'none';
-    } else {
+    } else if (radio.value === '否' && radio.checked) {
       addressField.style.display = 'none';
       emailField.style.display = 'block';
     }
   });
+});
 
-  document.querySelectorAll('.number-input').forEach(wrapper => {
-    const input = wrapper.querySelector('input');
-    const btnIncrease = wrapper.querySelector('.increase');
-    const btnDecrease = wrapper.querySelector('.decrease');
+// 數字增減
+document.querySelectorAll('.number-input').forEach(wrapper => {
+  const input = wrapper.querySelector('input[type="number"]');
+  const btnIncrease = wrapper.querySelector('.increase');
+  const btnDecrease = wrapper.querySelector('.decrease');
 
-    btnIncrease.addEventListener('click', () => {
-      input.stepUp(); // HTML5 input[type=number] 的方法
-    });
+  btnIncrease.addEventListener('click', () => input.stepUp());
+  btnDecrease.addEventListener('click', () => input.stepDown());
+});
 
-    btnDecrease.addEventListener('click', () => {
-      input.stepDown();
-    });
+// 表單送出
+document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const f = e.target;
+  const data = {
+    name: f.name.value,
+    phone: f.phone.value,
+    attendees: f.attendees.value,
+    babySeat: f.babySeat.value,
+    meal: f.meal.value,
+    paperInvite: f.paperInvite.value,
+    address: f.address?.value || '',
+    email: f.email?.value || '',
+    memo: f.memo?.value || ''
+  };
+
+  await fetch('https://script.google.com/macros/s/AKfycbzJkncF54YVBJGNzVfCmww9mH5C_secXlEu7G7tfGlwYbZOtBuN-yogpZdmBawby7cRqg/exec'
+, {
+    method: 'POST',
+    body: JSON.stringify(data)
   });
-      
-  document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
 
-    const f = e.target;
-    const data = {
-      name: f.name.value,
-      phone: f.phone.value,
-      attendees: f.attendees.value,
-      babySeat: f.babySeat.value,
-      meal: f.meal.value,
-      paperInvite: f.paperInvite.value,
-      address: f.address?.value || '',
-      email: f.email?.value || '',
-       memo:f.memo?.value || ''
-    };
+  alert('回覆成功，謝謝您！');
+  f.reset();
+});
 
-    await fetch('https://script.google.com/macros/s/AKfycbzJkncF54YVBJGNzVfCmww9mH5C_secXlEu7G7tfGlwYbZOtBuN-yogpZdmBawby7cRqg/exec', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-
-    alert('回覆成功，謝謝您！');
-    f.reset();
-  });
 </script>
 
 </body>
 </html>
+
