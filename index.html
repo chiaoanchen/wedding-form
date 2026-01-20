@@ -8,6 +8,12 @@
  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
   <style>
   
+  :root {
+  --color-main: #567E98;   /* 主深色 #c4b5a7 */
+  --color-light: #DEEDF4; /* 次淺色 #f7f3ef */
+  --color-text: #4B4B4B; /* 主要文字色 */
+  --color-muted: #777; /* 次要文字 */
+}
   
     body {
       font-family: 'Playfair Display', serif;
@@ -20,9 +26,8 @@
   .hero {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   overflow: hidden;
-  background: #c4b5a7;
 }
 
 .hero img {
@@ -30,7 +35,7 @@
   height: 100%;
   object-fit: cover;
   /* 可依照片構圖調整 50% ~ 80% 之間 */
-  object-position: center 70%;
+  object-position: center 50%;
 }
 
 .hero::after {
@@ -59,12 +64,13 @@
 .intro {
   text-align: center;
   padding: 80px 20px 60px;
-  background: #f7f3ef;
+  background:var(--color-light);
 }
 
 .intro h2 {
-  font-size: 6vw; 
+  font-size: 8vw; 
   font-weight: 400;
+  color: var(--color-main);
   margin-bottom: 16px;
   font-family: 'Dancing Script', cursive;
   
@@ -73,25 +79,25 @@
 .intro .subtitle {
   font-size: 16px;
   letter-spacing: 2px;
-  color: #999;
+  color: #999;  
   margin-bottom: 30px;
 }
 
 .intro-info p {
   margin: 6px 0;
   font-size: 16px;
-  color: #4B4B4B;
+  color: var(--color-text);
 }
 
 .intro-info .address {
   font-size: 14px;
-  color: #777;
+  color: var(--color-muted);
 }
 
 .schedule {
   margin: 50px 0 20px 0;
   font-size: 15px;
-  color: #4B4B4B;
+  color: #000;
   display: flex;
   justify-content: center;
   gap: 24px; /* 時間與文字間距 */
@@ -101,12 +107,47 @@
 
 .schedule .time {
   font-weight: 600;
-  color: #C4B5A7; /* 金色/高級感顏色 */
+  color: var(--color-main);
   margin-left:12px;
 }
 
+/* ===== 區塊三：婚紗照 ===== */
 
-/* ===== 區塊三：表單 ===== */
+.photo-section {
+  padding: 10vh 0;
+  background:var(--color-main);
+}
+
+.photo-scroll {
+  display: flex;
+  gap: 5vw;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* iOS 滑動順 */
+}
+
+.photo-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.photo-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-main);
+  border-radius: 3px;
+}
+
+.photo-scroll img {
+  width: 180px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+/* ===== 區塊四：出席表單 ===== */
   
 .container {
   max-width: 520px;
@@ -139,7 +180,7 @@
       width: 100%;
       padding: 10px 12px;
       margin-top: 6px;
-      border: 1px solid #C4B5A7;
+      border: 1px solid var(--color-main);
       border-radius: 6px;
       font-size: 15px;
       color: #333;
@@ -160,7 +201,7 @@ input::placeholder {
       overflow: hidden;
     }
     .number-input button {
-      background: #C4B5A7;
+      background: var(--color-main);
       border: none;
       padding: 6px 12px;
       cursor: pointer;
@@ -186,7 +227,7 @@ input::placeholder {
       width: 100%;
       padding: 14px;
       font-size: 16px;
-      background-color: #C4B5A7;
+      background-color: var(--color-main);
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -213,7 +254,7 @@ form div label input[type="radio"] {
   appearance: none;  /*移除預設樣式 */
   width: 20px;      /* 外圈縮小 */
   height: 10px;
-  border: 2px solid #C4B5A7;
+  border: 2px solid var(--color-main);
   border-radius: 100%;
   margin-right: 8px;
   position: relative;
@@ -227,8 +268,8 @@ form div label input[type="radio"]::after {
   content: '';
   display: block;
   width: 17px;
-  height:15px;
-  background-color: #C4B5A7;
+  height:17px;
+  background-color: var(--color-main);
   border-radius: 100%;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -244,7 +285,7 @@ textarea {
   width: 100%;
   padding: 10px 12px;
   margin-top: 6px;
-  border: 1px solid #C4B5A7;
+  border: 1px solid var(--color-main);
   border-radius: 6px;
   font-size: 15px;
   color: #333;
@@ -265,11 +306,11 @@ textarea::placeholder {
 }
 
 
-/* ===== 區塊四：收尾 ===== */
+/* ===== 區塊五：收尾 ===== */
 .welcoming {
   text-align: center;
   padding: 80px 20px 60px;
-  background: #f7f3ef;
+  background: var(--color-light);
   color: #4B4B4B;
 }
 
@@ -310,10 +351,6 @@ textarea::placeholder {
 
 @media (max-width: 768px) {
 
-  /* Hero 區塊 */
-  .hero {
-    height: 55vh;
-  }
 
   .hero-text h1 {
     font-size: 32px;
@@ -328,7 +365,6 @@ textarea::placeholder {
   .intro {
     padding: 60px 20px 50px;
   }
-
 
   .intro .subtitle {
     font-size: 14px;
@@ -412,10 +448,11 @@ textarea::placeholder {
 <body>
 
 <div class="hero">
-  <img src="https://i0.wp.com/circoart.com/wp-content/uploads/2024/05/%E6%89%8B%E7%B9%AA%E6%B8%B2%E6%9F%93%E6%B0%B4%E5%BD%A9-%EF%BC%A2-%E6%9C%89%E8%83%8C%E6%99%AF.png" alt="hero">
+  <img src="https://circoart.com/wp-content/uploads/2026/01/雅瑄-書約-電子喜帖.jpg" alt="hero">
+  <!--新人姓名
   <div class="hero-text">
     <h1>Juliet & Romeo</h1>
-  </div>
+  </div>-->
 </div>
 
 <div class="intro">
@@ -424,15 +461,22 @@ textarea::placeholder {
 
   <div class="intro-info">
     <p>2026 年 06 月 20 日 (週日)</p>
-    <p>晶華酒店宴會廳</p>
-    <p class="address">台北市中山區中山北路二段41號</p>
+    <p>南投雲品溫泉酒店</p>
+    <p class="address">南投縣魚池鄉中正路23號</p>
   </div>
     <div class="schedule">
     <span class="time">17:30</span> 迎賓報到
     <span class="time">18:00</span> 準時開始
   </div>
 </div>
-
+<div class="photo-section">
+  <div class="photo-scroll">
+    <img src="https://circoart.com/wp-content/uploads/2026/01/IMG_9662.jpg" alt="photo1">
+    <img src="https://circoart.com/wp-content/uploads/2026/01/IMG_9661.jpg" alt="photo2">
+    <img src="https://circoart.com/wp-content/uploads/2026/01/IMG_9691-rotated.jpg" alt="photo3">
+    <img src="https://circoart.com/wp-content/uploads/2026/01/IMG_9704-rotated.jpg" alt="photo4">
+  </div>
+</div>
 <div class="container">
   <form id="rsvpForm">
     <label>姓名 / Name *
@@ -503,7 +547,7 @@ textarea::placeholder {
     <p style="margin-bottom:20px; color:#999; letter-spacing:2px;">
       WEDDING LOCATION
     </p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.407379972681!2d121.51806179678951!3d25.054177999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a968fd15c21d%3A0x1b494fb2ade1569a!2z5pm26I-v6YWS5bqX!5e0!3m2!1szh-TW!2sus!4v1768818721640!5m2!1szh-TW!2sus" allowfullscreen loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.5272428093613!2d120.92346219999997!3d23.870915699999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468d66bcbaf5f5f%3A0xb2978a42c211e576!2z6Zuy5ZOB5rqr5rOJ6YWS5bqX!5e0!3m2!1szh-TW!2stw!4v1768884165874!5m2!1szh-TW!2stw" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </div>
   
