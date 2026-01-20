@@ -14,13 +14,28 @@
   --color-text: #4B4B4B; /* 主要文字色 */
   --color-muted: #777; /* 次要文字 */
 }
+
+.example-banner {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  background-color:#c4b5a7;
+  padding: 6px 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
   
     body {
       font-family: 'Playfair Display', serif;
       background: #ffffff;
       color: #333;
       margin: 0;
-      padding: 0;
+      padding-top: 28px;
     }
   
   .hero {
@@ -453,6 +468,9 @@ textarea::placeholder {
   </style>
 </head>
 <body>
+<div class="example-banner">
+  此為範例網站 This is an example site.
+</div>
 
 <div class="hero">
   <img src="https://circoart.com/wp-content/uploads/2026/01/雅瑄-書約-電子喜帖.jpg" alt="hero">
